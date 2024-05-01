@@ -1,5 +1,5 @@
 import { AuthI } from "@/types";
-import { ReactNode, createContext, useEffect, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 
 interface AuthContextValue {
   auth: AuthI | undefined;
@@ -13,10 +13,6 @@ export const AuthContext = createContext<AuthContextValue>({
 
 const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [auth, setAuth] = useState<AuthI | undefined>(undefined);
-
-  useEffect(() => {
-    console.log(auth);
-  }, [auth]);
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
