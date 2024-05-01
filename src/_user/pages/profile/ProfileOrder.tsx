@@ -31,7 +31,9 @@ const ProfileOrder = () => {
     <div className="mt-8 lg:mt-0 w-full">
       <h1 className="text-3xl font-semibold mb-2">Orders</h1>
       {isLoading ? (
-        <LoadingRed style="" />
+        <div className="w-full mt-24 flex items-center justify-center">
+          <LoadingRed style="" />
+        </div>
       ) : (
         orders &&
         orders.map((order, i) => (

@@ -9,6 +9,7 @@ import {
 import { Bread, List, ShoppingCart, User } from "@phosphor-icons/react";
 import { Link } from "react-router-dom";
 import Headroom from "react-headroom";
+import useAuth from "@/hooks/useAuth";
 
 const navLinks = [
   { name: "Home", path: "/" },
@@ -17,6 +18,7 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { auth } = useAuth();
   return (
     <Headroom className="z-20 relative">
       <nav className="border-b border-gray-300  h-[72px] bg-white drop-shadow-sm  flex items-center">
@@ -50,6 +52,14 @@ const Navbar = () => {
               <Link to={"/profile"}>
                 <User size={24} />
               </Link>
+              {auth?.user.role === "admin" && (
+                <Link
+                  to={"/admin"}
+                  className="text-white bg-accent_alt px-4 py-2 rounded-full text-sm"
+                >
+                  Admin
+                </Link>
+              )}
             </div>
             <div className="lg:hidden">
               <Sheet>

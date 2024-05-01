@@ -1,3 +1,4 @@
+import LoadingRed from "@/components/LoadingRed";
 import CreateAddress from "@/components/cart/CreateAddress";
 import useAddress from "@/hooks/useAddress";
 import useAuth from "@/hooks/useAuth";
@@ -12,8 +13,10 @@ const ProfileAddress = () => {
   const { auth } = useAuth();
   const [addresses, setAddresses] = useState<MainAddressesI[]>([]);
   const { deleteAddress, error, isLoading } = useAddress();
+  const [addressLoading, setAddressLoading] = useState(false);
 
   const fetchAddresses = async () => {
+    setAddressLoading(true);
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/addresses`,
       {
@@ -25,6 +28,7 @@ const ProfileAddress = () => {
 
     const json = await response.json();
     setAddresses(json.data);
+    setAddressLoading(false);
   };
   const handleDelete = async (id: string) => {
     await deleteAddress(auth?.accessToken, id);
@@ -51,41 +55,48 @@ const ProfileAddress = () => {
       <div className="mb-4 mt-8 lg:mt-0">
         <CreateAddress auth={auth} setAddresses={setAddresses} />
       </div>
-      <div className="px-4 py-6 bg- rounded-lg drop-shadow-md bg-white">
-        <div className="font-semibold text-xl">Addresses</div>
-        <div className="flex flex-col gap-2 mt-2">
-          {addresses.map((address, i) => (
-            <div
-              key={i}
-              className="flex justify-between text-sm py-2 border-b border-gray-400"
-            >
-              <div className="flex flex-col gap-2">
-                <div>
-                  <span className="font-semibold">{address.name}</span> |{" "}
-                  {address.phone}
-                </div>
-                <div>
-                  <p>{address.province}</p>
-                  <p>{address.city}</p>
-                  <p>{address.detail}</p>
-                </div>
-              </div>
-              <div className="flex gap-2 items-start">
-                <div className="p-2 bg-sky-500 h-fit rounded-md text-white">
-                  <PencilSimpleLine className="lg:text-xl text-sm" />
-                </div>
-                <button
-                  disabled={isLoading}
-                  onClick={() => handleDelete(address._id)}
-                  className="p-2 bg-accent_alt h-fit rounded-md text-white"
-                >
-                  <Trash className="lg:text-xl text-sm" />
-                </button>
-              </div>
-            </div>
-          ))}
+
+      {addressLoading ? (
+        <div className="flex w-full mt-12 justify-center">
+          <LoadingRed style="" />
         </div>
-      </div>
+      ) : (
+        <div className="px-4 py-6 bg- rounded-lg drop-shadow-md bg-white">
+          <div className="font-semibold text-xl">Addresses</div>
+          <div className="flex flex-col gap-2 mt-2">
+            {addresses.map((address, i) => (
+              <div
+                key={i}
+                className="flex justify-between text-sm py-2 border-b border-gray-400"
+              >
+                <div className="flex flex-col gap-2">
+                  <div>
+                    <span className="font-semibold">{address.name}</span> |{" "}
+                    {address.phone}
+                  </div>
+                  <div>
+                    <p>{address.province}</p>
+                    <p>{address.city}</p>
+                    <p>{address.detail}</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 items-start">
+                  <div className="p-2 bg-sky-500 h-fit rounded-md text-white">
+                    <PencilSimpleLine className="lg:text-xl text-sm" />
+                  </div>
+                  <button
+                    disabled={isLoading}
+                    onClick={() => handleDelete(address._id)}
+                    className="p-2 bg-accent_alt h-fit rounded-md text-white"
+                  >
+                    <Trash className="lg:text-xl text-sm" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
