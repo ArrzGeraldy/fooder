@@ -1,4 +1,4 @@
-import { CreditCard } from "@phosphor-icons/react";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useNavigate, useParams } from "react-router-dom";
 import Payment from "../../components/Payment";
 import { useEffect, useState } from "react";
