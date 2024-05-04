@@ -23,6 +23,7 @@ const formSchema = z.object({
 const SignUp = () => {
   const [error, setError] = useState<string>();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,6 +39,7 @@ const SignUp = () => {
     email: string,
     password: string
   ) => {
+    setIsLoading(true);
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/auth/register`,
       {
@@ -51,7 +53,7 @@ const SignUp = () => {
     const json = await response.json();
     if (response.ok) navigate("/sign-in");
     if (json.error?.message) setError(json.error.message);
-    console.log(json);
+    setIsLoading(false);
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -124,7 +126,10 @@ const SignUp = () => {
               )}
             />
 
-            <Button className="w-full mt-4">Register</Button>
+            <Button disabled={isLoading} className="w-full mt-4">
+              {" "}
+              {isLoading ? "Loading..." : "Register"}
+            </Button>
           </form>
         </Form>
         <p className="text-sm mt-4">

@@ -24,6 +24,7 @@ const SignIn = () => {
   const navigate = useNavigate();
   const authContext = useAuth();
   const setAuth = authContext ? authContext.setAuth : () => {};
+  const [isLoading, setIsLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,6 +35,7 @@ const SignIn = () => {
   });
 
   const login = async (email: string, password: string) => {
+    setIsLoading(true);
     const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
       method: "POST",
       credentials: "include",
@@ -52,7 +54,7 @@ const SignIn = () => {
       navigate("/");
     }
     if (json.error?.message) setError(json.error.message);
-    console.log(json);
+    setIsLoading(false);
   };
 
   // 2. Define a submit handler.
@@ -109,7 +111,9 @@ const SignIn = () => {
               )}
             />
 
-            <Button className="w-full mt-4">Login</Button>
+            <Button disabled={isLoading} className="w-full mt-4">
+              {isLoading ? "Loading..." : "Login"}
+            </Button>
           </form>
         </Form>
         <p className="text-sm mt-4">
