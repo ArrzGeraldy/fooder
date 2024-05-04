@@ -9,12 +9,14 @@ import useAuth from "@/hooks/useAuth";
 import QtySelect from "./QtySelect";
 import { toastError, toastSuccess } from "@/lib/toaster";
 import { Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const Modal = () => {
   const { modal, item, setModal, amount, setAmount } = useModal();
   const [quantity, setQuantity] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const authContext = useAuth();
+  const { auth } = useAuth();
+  const navigate = useNavigate();
 
   const closeModal = () => {
     document.body.style.overflow = "auto";
@@ -28,14 +30,20 @@ const Modal = () => {
   };
 
   const addToCart = async () => {
+    if (!auth?.accessToken) {
+      navigate("/sign-in");
+      return;
+    }
+
     setIsLoading(true);
+
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/cart`,
       {
         method: "POST",
         headers: {
           "content-type": "application/json",
-          authorization: `Bearer ${authContext?.auth?.accessToken}`,
+          authorization: `Bearer ${auth?.accessToken}`,
         },
         body: JSON.stringify({ itemId: item?._id, quantity: quantity }),
       }
