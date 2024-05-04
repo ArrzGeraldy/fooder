@@ -2,7 +2,11 @@ import { MagnifyingGlass } from "@phosphor-icons/react";
 import { useSearchParams } from "react-router-dom";
 import { useDebouncedCallback } from "use-debounce";
 
-const Search = () => {
+const Search = ({
+  setPage,
+}: {
+  setPage: React.Dispatch<React.SetStateAction<number>>;
+}) => {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSearch = useDebouncedCallback((term: string) => {
@@ -11,6 +15,7 @@ const Search = () => {
       newSearchParams.delete("q");
       setSearchParams(newSearchParams.toString());
     } else {
+      setPage(1);
       setSearchParams({ q: term });
     }
   }, 500);

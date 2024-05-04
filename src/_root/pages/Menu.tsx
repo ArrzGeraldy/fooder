@@ -211,7 +211,7 @@ const Menu = () => {
               </DropdownMenu>
             </div>
 
-            <Search />
+            <Search setPage={setPage} />
           </div>
 
           <div className="w-full flex justify-center mb-12">
