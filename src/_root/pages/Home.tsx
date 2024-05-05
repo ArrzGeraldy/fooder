@@ -26,7 +26,11 @@ const Home = () => {
           </div>
 
           <div className=" bg-accent_alt rounded-full w-fit">
-            <img src={heroImg} alt="" className="lg:max-w-xl max-w-md" />
+            <img
+              src={heroImg}
+              alt=""
+              className="lg:max-w-xl md:max-w-md max-w-sm"
+            />
           </div>
         </div>
       </section>
@@ -39,7 +43,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="grid grid-cols-1 lg:grid-cols-2 w-4/5 mx-auto gap-8 mt-24">
+      <section className="grid grid-cols-1 lg:grid-cols-2 md:w-4/5 w-[90%] mx-auto gap-8 mt-24">
         <div
           style={{ backgroundImage: `url(${BannerOne})` }}
           className="bg-cover bg-center h-56 rounded-md flex items-center px-8"

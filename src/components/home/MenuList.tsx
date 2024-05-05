@@ -37,7 +37,7 @@ const MenuList = () => {
   return (
     <>
       <div className="bg-white flex ">
-        <div className=" flex flex-col items-center w-4/5 mx-auto mt-2">
+        <div className=" flex flex-col items-center md:w-4/5 w-[90%] mx-auto mt-2">
           <div className="flex gap-4 bg-gray-200 rounded-full mb-2">
             <button
               onClick={() => setQcategory("")}

@@ -17,7 +17,7 @@ const Card = ({ menu }: { menu: MenuI }) => {
   return (
     <div
       onClick={() => openModal(menu)}
-      className="text-sm border drop-shadow-md cursor-pointer border-gray-100  shadow-md px-4 py-6 flex flex-col gap-y-1 justify-end hover:border-accent_alt hover:shadow-xl rounded-md transition-all"
+      className="text-xs md:text-sm border drop-shadow-md cursor-pointer border-gray-100  shadow-md px-4 py-6 flex flex-col gap-y-1 justify-end hover:border-accent_alt hover:shadow-xl rounded-md transition-all"
     >
       <div>
         <img src={`${import.meta.env.VITE_API_URL}/${menu.image_url}`} alt="" />
@@ -30,7 +30,7 @@ const Card = ({ menu }: { menu: MenuI }) => {
           </h4>
         </div>
       </div>
-      <div className="flex justify-between items-center mt-2 flex-wrap gap-2">
+      <div className="flex md:justify-between md:items-center mt-2 md:flex-row flex-col gap-2">
         <p className="font-semibold">{toRupiah(menu.price)}</p>
         <button className="bg-accent_alt px-2 py-1 rounded-md text-white">
           + Add

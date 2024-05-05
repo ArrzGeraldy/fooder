@@ -55,7 +55,7 @@ const Navbar = () => {
               {auth?.user.role === "admin" && (
                 <Link
                   to={"/admin"}
-                  className="text-white bg-accent_alt px-4 py-2 rounded-full text-sm"
+                  className="text-white bg-accent_alt px-4 py-2 rounded-full text-sm hidden md:inline"
                 >
                   Admin
                 </Link>
@@ -68,9 +68,19 @@ const Navbar = () => {
                 </SheetTrigger>
                 <SheetContent className="bg-primary w-2/3">
                   <SheetHeader>
-                    <SheetTitle className="text-[#242424] border-b border-gray-400 pb-2">
+                    <SheetTitle className="text-[#242424] border-b border-gray-400 pb-2 mt-6 md:mt-0">
                       Welcome to Company
                     </SheetTitle>
+                    <SheetClose asChild>
+                      {auth?.user.role === "admin" && (
+                        <Link
+                          to={"/admin"}
+                          className="text-white bg-accent_alt px-4 py-2 rounded-full text-sm md:hidden inline"
+                        >
+                          Admin
+                        </Link>
+                      )}
+                    </SheetClose>
                     {navLinks.map((link) => (
                       <SheetClose asChild key={link.name}>
                         <Link

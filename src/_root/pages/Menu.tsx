@@ -96,8 +96,8 @@ const Menu = () => {
   return (
     <>
       <section className="bg-white flex">
-        <aside className="fixed lg:w-[20%] lg:sticky top-0 z-30 lg:z-10 shadow-md tag-menu -translate-x-72 lg:translate-x-0 flex h-screen">
-          <div className="w-72 lg:w-full border-e border-gray-200 bg-white px-4">
+        <aside className="fixed lg:w-[20%] lg:sticky top-0 z-30 lg:z-10 tag-menu -translate-x-72 lg:translate-x-0 flex h-screen">
+          <div className="w-72 lg:w-full border-e border-gray-300  bg-white px-4">
             <h1 className="text-2xl font-semibold text-center mt-4 mb-4">
               Tags
             </h1>

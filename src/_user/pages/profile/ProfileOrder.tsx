@@ -39,23 +39,23 @@ const ProfileOrder = () => {
         orders.map((order, i) => (
           <div
             key={i}
-            className="bg-white mt-4 px-4 py-2.5 w-[90%] rounded-md drop-shadow-md  flex justify-between items-center"
+            className="bg-white mt-4 text-sm md:text-base items-start px-4 py-2.5 w-[90%] rounded-md drop-shadow-md  flex justify-between md:items-center"
           >
-            <div className="flex gap-4 items-center">
-              <span className="font-semibold">#{i + 1}</span>
+            <div className="flex gap-4 md:items-center items-start md:flex-row flex-col">
               <div className="flex gap-2 items-center">
+                <span className="font-semibold">#{i + 1}</span>
                 <span>{order._id}</span>
-                <span
-                  className={cn(
-                    "text-xs rounded-md p-1.5",
-                    order.status === "waiting payment"
-                      ? "bg-yellow-200 text-yellow-700"
-                      : "bg-green-200 text-green-700"
-                  )}
-                >
-                  {order.status}
-                </span>
               </div>
+              <span
+                className={cn(
+                  "text-xs rounded-md p-1.5",
+                  order.status === "waiting payment"
+                    ? "bg-yellow-200 text-yellow-700"
+                    : "bg-green-200 text-green-700"
+                )}
+              >
+                {order.status}
+              </span>
             </div>
             <Link
               to={`/order/${order._id}`}
