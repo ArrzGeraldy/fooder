@@ -5,9 +5,11 @@ import { Link, Outlet, useLocation } from "react-router-dom";
 
 const items = [
   { name: "Dashboard", href: "/admin" },
-  { name: "Product", href: "/admin/product" },
-  { name: "Category", href: "/admin/category" },
-  { name: "Tag", href: "/admin/tag" },
+  { name: "Products", href: "/admin/product" },
+  { name: "Categories", href: "/admin/category" },
+  { name: "Tags", href: "/admin/tag" },
+  { name: "Users", href: "/admin/users" },
+  { name: "Orders", href: "/admin/orders" },
 ];
 
 const AdminLayout = () => {
@@ -18,8 +20,8 @@ const AdminLayout = () => {
   };
 
   return (
-    <main className="flex gap-8">
-      <aside className="tag-menu lg:sticky top-0 flex lg:w-2/12 absolute z-10 h-screen text-white -translate-x-72 lg:translate-x-0">
+    <main className="flex gap-8 h-screen">
+      <aside className="tag-menu top-0 flex lg:w-2/12 fixed z-10 h-screen text-white -translate-x-72 lg:translate-x-0">
         <div className="border-e py-6 lg:w-full flex flex-col justify-between  w-72 bg-accent_alt">
           <div>
             <h1 className="text-center font-semibold text-2xl">Admin</h1>
@@ -59,8 +61,8 @@ const AdminLayout = () => {
           </div>
         </div>
       </aside>
-      <section className="lg:w-[83%] w-full">
-        <div className="w-[95%] flex mx-auto mt-6">
+      <section className="w-full bg-gray-50">
+        <div className="w-[80%]  mx-auto mt-6 lg:ms-72">
           <Outlet />
         </div>
       </section>

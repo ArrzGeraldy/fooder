@@ -45,22 +45,33 @@ const Navbar = () => {
           </div>
 
           <div className="flex gap-2 items-center">
-            <div className="flex gap-4  items-center">
-              <Link to={"/cart"}>
-                <ShoppingCart size={24} />
+            {!auth?.accessToken ? (
+              <Link
+                to={"/sign-in"}
+                className="text-sm rounded-full bg-accent_alt text-white px-4 py-2"
+              >
+                Login
               </Link>
-              <Link to={"/profile"}>
-                <User size={24} />
-              </Link>
-              {auth?.user.role === "admin" && (
-                <Link
-                  to={"/admin"}
-                  className="text-white bg-accent_alt px-4 py-2 rounded-full text-sm hidden md:inline"
-                >
-                  Admin
+            ) : (
+              <div className="flex gap-4  items-center">
+                <Link to={"/cart"}>
+                  <ShoppingCart size={24} />
                 </Link>
-              )}
-            </div>
+                <Link to={"/profile"}>
+                  <User size={24} />
+                </Link>
+
+                {auth?.user.role === "admin" && (
+                  <Link
+                    to={"/admin"}
+                    className="text-white bg-accent_alt px-4 py-2 rounded-full text-sm hidden md:inline"
+                  >
+                    Admin
+                  </Link>
+                )}
+              </div>
+            )}
+
             <div className="lg:hidden">
               <Sheet>
                 <SheetTrigger>

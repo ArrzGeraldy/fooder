@@ -6,9 +6,11 @@ import { CartItemsI } from "@/types";
 const CheckOut = ({
   cartItems,
   handleCheckOut,
+  checkOutLoading,
 }: {
   cartItems: CartItemsI[];
   handleCheckOut: () => void;
+  checkOutLoading: boolean;
 }) => {
   const [totalAmount, setTotalAmount] = useState(0);
 
@@ -28,6 +30,7 @@ const CheckOut = ({
           <span className="md:text-lg">{toRupiah(totalAmount)}</span>
         </div>
         <Button
+          disabled={checkOutLoading}
           onClick={handleCheckOut}
           className="bg-accent_alt hover:bg-accent_hover rounded-none py-6"
         >

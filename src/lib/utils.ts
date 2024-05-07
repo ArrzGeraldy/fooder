@@ -13,3 +13,14 @@ export const toRupiah = (amount: number): string => {
   });
   return formatter.format(amount);
 };
+
+export const convertDate = (createAt: string) => {
+  const d = new Date(createAt);
+
+  const month = d.getMonth();
+  const date = d.getDate();
+
+  const year = d.getFullYear();
+
+  return `${month}-${date}-${year}`;
+};

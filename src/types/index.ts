@@ -29,6 +29,11 @@ export interface UserI {
   role: string;
 }
 
+export interface UserDetailI extends UserI {
+  createdAt: string;
+  _id: string;
+}
+
 export interface AuthI {
   user: UserI;
   accessToken: string;
@@ -73,7 +78,7 @@ export interface OrderI {
   delivery_fee: number;
   snap_token: string;
   status: string;
-  user: UserI;
+  user: UserI | null;
   total: number;
 }
 

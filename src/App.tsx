@@ -21,6 +21,8 @@ import AdminCategory from "./_admin/pages/AdminCategory";
 import AdminTag from "./_admin/pages/AdminTag";
 import CreateProduct from "./components/admin/product/CreateProduct";
 import NotFound from "./components/NotFound";
+import AdminOrders from "./_admin/pages/AdminOrders";
+import AdminUsers from "./_admin/pages/AdminUsers";
 
 const App = () => {
   return (
@@ -56,6 +58,8 @@ const App = () => {
             <Route path="/admin/product/create" element={<CreateProduct />} />
             <Route path="/admin/category" element={<AdminCategory />} />
             <Route path="/admin/tag" element={<AdminTag />} />
+            <Route path="/admin/users" element={<AdminUsers />} />
+            <Route path="/admin/orders" element={<AdminOrders />} />
           </Route>
         </Route>
         {/* admin */}

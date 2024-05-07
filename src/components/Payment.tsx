@@ -1,6 +1,7 @@
 import { toRupiah } from "@/lib/utils";
 import { AuthI, OrderI, OrderItemI } from "@/types";
 import { useEffect } from "react";
+import OrderStatus from "./OrderStatus";
 
 interface PaymentI {
   id: string | undefined;
@@ -52,11 +53,8 @@ const Payment = ({ auth, id, order, orderItems }: PaymentI) => {
             <div>
               Order Id: <span>#{id}</span>
             </div>
-            <div className="mt-1">
-              Status:{" "}
-              <span className="text-yellow-700 bg-yellow-300 px-2 py-1 rounded-lg text-xs font-semibold">
-                {order?.status}
-              </span>
+            <div className="mt-1.5">
+              <OrderStatus status={order?.status} />
             </div>
           </div>
         </div>
@@ -83,12 +81,14 @@ const Payment = ({ auth, id, order, orderItems }: PaymentI) => {
                   <span>
                     {item.product.name} x {item.quantity}
                   </span>
-                  <span>{toRupiah(item.amount)}</span>
+                  <span className="font-medium">{toRupiah(item.amount)}</span>
                 </div>
               ))}
               <div className="flex justify-between">
                 <span>Tax fee:</span>
-                <span>{toRupiah(order?.delivery_fee || 0)}</span>
+                <span className="font-medium">
+                  {toRupiah(order?.delivery_fee || 0)}
+                </span>
               </div>
 
               <div className="flex justify-between font-semibold mt-2 text-base">

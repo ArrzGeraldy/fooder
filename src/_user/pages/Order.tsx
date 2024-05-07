@@ -44,7 +44,7 @@ const Order = () => {
 
   useEffect(() => {
     if (!isLoading) {
-      if (auth?.user.email !== order?.user.email || !order) {
+      if (auth?.user.email !== order?.user?.email || !order) {
         return navigate("/");
       }
     }

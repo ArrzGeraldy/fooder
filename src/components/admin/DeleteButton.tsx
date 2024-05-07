@@ -32,6 +32,8 @@ const DeleteButton = ({
       }
     );
 
+    console.log(id);
+
     if (res.ok) {
       setIsLoading(false);
       fetchData();
@@ -47,7 +49,7 @@ const DeleteButton = ({
 
   return (
     <button onClick={handleDelete} disabled={isLoading}>
-      <Badge className="bg-red-500 cursor-pointer">Delete</Badge>
+      <Badge className="bg-red-500 cursor-pointer text-white">Delete</Badge>
     </button>
   );
 };

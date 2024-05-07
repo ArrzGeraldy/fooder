@@ -14,6 +14,7 @@ const Cart = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [addresses, setAddresses] = useState<MainAddressesI[]>([]);
   const [selectaddress, setSelectAddress] = useState<MainAddressesI>();
+  const [checkOutLoading, setCheckOutLoading] = useState(false);
   const { auth } = useAuth();
   const navigate = useNavigate();
 
@@ -57,6 +58,7 @@ const Cart = () => {
       return;
     }
 
+    setCheckOutLoading(true);
     toastLoading();
     const response = await fetch(
       `${import.meta.env.VITE_API_URL}/api/v1/orders`,
@@ -72,8 +74,10 @@ const Cart = () => {
 
     const json = await response.json();
     toast.dismiss("loader");
+    setCheckOutLoading(false);
 
     if (response.ok) {
+      setCheckOutLoading(false);
       navigate(`/order/${json.data._id}`);
     }
   };
@@ -183,7 +187,11 @@ const Cart = () => {
           </aside>
         </div>
       </div>
-      <CheckOut handleCheckOut={handleCheckOut} cartItems={cartItems} />
+      <CheckOut
+        handleCheckOut={handleCheckOut}
+        cartItems={cartItems}
+        checkOutLoading={checkOutLoading}
+      />
     </div>
   );
 };
