@@ -6,8 +6,6 @@ const useRegion = () => {
   const [cities, setCities] = useState<CityI[]>([]);
   const [provinceId, setProvinceId] = useState<string>();
   const url = "https://www.emsifa.com/api-wilayah-indonesia/api";
-  //   const url =
-  //     "https://www.emsifa.com/api-wilayah-indonesia/api/regencies/31.json";
 
   useEffect(() => {
     const getProvinces = async () => {

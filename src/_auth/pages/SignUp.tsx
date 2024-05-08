@@ -17,7 +17,7 @@ import { useState } from "react";
 const formSchema = z.object({
   username: z.string().min(4, "Username at least 4 characters"),
   email: z.string().min(1, "Email is required").email(),
-  password: z.string().min(3, "Password at least 3 characters"),
+  password: z.string().min(4, "Password at least 4 characters"),
 });
 
 const SignUp = () => {

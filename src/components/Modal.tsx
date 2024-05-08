@@ -31,6 +31,7 @@ const Modal = () => {
 
   const addToCart = async () => {
     if (!auth?.accessToken) {
+      closeModal();
       navigate("/sign-in");
       return;
     }

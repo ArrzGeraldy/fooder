@@ -1,9 +1,10 @@
+import EditAddress from "@/components/EditAddress";
 import LoadingRed from "@/components/LoadingRed";
 import CreateAddress from "@/components/cart/CreateAddress";
 import useAddress from "@/hooks/useAddress";
 import useAuth from "@/hooks/useAuth";
 import { MainAddressesI } from "@/types";
-import { PencilSimpleLine, Trash } from "@phosphor-icons/react";
+import { Trash } from "@phosphor-icons/react";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 
@@ -81,9 +82,10 @@ const ProfileAddress = () => {
                   </div>
                 </div>
                 <div className="flex gap-2 items-start">
-                  <div className="p-2 bg-sky-500 h-fit rounded-md text-white">
-                    <PencilSimpleLine className="lg:text-xl text-sm" />
-                  </div>
+                  <EditAddress
+                    address={address}
+                    fetchAddresses={fetchAddresses}
+                  />
                   <button
                     disabled={isLoading}
                     onClick={() => handleDelete(address._id)}
