@@ -103,10 +103,6 @@ const EditAddress = ({
   };
 
   useEffect(() => {
-    console.log(formData);
-  }, [formData]);
-
-  useEffect(() => {
     const p = provincies.filter(
       (province) => province.name === formData.province
     );
