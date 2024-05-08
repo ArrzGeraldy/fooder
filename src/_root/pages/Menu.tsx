@@ -193,7 +193,10 @@ const Menu = () => {
                   <DropdownMenuSeparator />
                   <DropdownMenuItem
                     className="cursor-pointer"
-                    onClick={() => setQCategory("")}
+                    onClick={() => {
+                      setPage(1);
+                      setQCategory("");
+                    }}
                   >
                     All
                   </DropdownMenuItem>
@@ -202,7 +205,10 @@ const Menu = () => {
                       <DropdownMenuItem
                         key={i}
                         className="cursor-pointer"
-                        onClick={() => setQCategory(category.name)}
+                        onClick={() => {
+                          setPage(1);
+                          setQCategory(category.name);
+                        }}
                       >
                         {category.name}
                       </DropdownMenuItem>
