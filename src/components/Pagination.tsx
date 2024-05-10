@@ -25,7 +25,7 @@ const Pagination = ({ totalPage, setPage, page }: PaginationPropsI) => {
     scrollTop();
   };
   return (
-    <div className="flex justify-center gap-4 items-center text-[#333]">
+    <div className="flex justify-center gap-4 items-center text-[#333] mt-8">
       <button
         onClick={handlePrev}
         className="flex items-center hover:text-black"

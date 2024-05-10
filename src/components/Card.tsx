@@ -21,14 +21,13 @@ const Card = ({ menu }: { menu: MenuI }) => {
     >
       <div>
         <img src={`${import.meta.env.VITE_API_URL}/${menu.image_url}`} alt="" />
-        <div className="mt-1">
-          <span className="text-xs text-gray-500 ">
-            {menu.tags.map((tag) => `${tag.name} `)}
-          </span>
-          <h4 className="font-semibold hover:text-accent_alt transition-all">
-            {menu.name}
-          </h4>
-        </div>
+
+        <span className="text-xs text-gray-500 ">
+          {menu.tags.map((tag) => `${tag.name} `)}
+        </span>
+        <h4 className="font-semibold hover:text-accent_alt transition-all">
+          {menu.name}
+        </h4>
       </div>
       <div className="flex md:justify-between md:items-center mt-2 md:flex-row flex-col gap-2">
         <p className="font-semibold">{toRupiah(menu.price)}</p>

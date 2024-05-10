@@ -94,149 +94,146 @@ const Menu = () => {
   }, [qTags, qcategory, q, page, sort]);
 
   return (
-    <>
-      <section className="bg-white flex">
-        <aside className="fixed lg:w-[20%] lg:sticky top-0 z-30 lg:z-10 tag-menu -translate-x-72 lg:translate-x-0 flex h-screen">
-          <div className="w-72 lg:w-full border-e border-gray-300  bg-white px-4">
-            <h1 className="text-2xl font-semibold text-center mt-4 mb-4">
-              Tags
-            </h1>
-            <div className="flex flex-col gap-3">
+    <section className="bg-white flex">
+      <aside className="fixed lg:w-[20%] lg:sticky top-0 z-30 lg:z-10 tag-menu -translate-x-72 lg:translate-x-0 flex h-screen">
+        <div className="w-72 lg:w-full border-e border-gray-300  bg-white px-4">
+          <h1 className="text-2xl font-semibold text-center mt-4 mb-4">Tags</h1>
+          <div className="flex flex-col gap-3">
+            <Button
+              onClick={() => {
+                setQTags([]);
+                setPage(1);
+                closeAside();
+              }}
+              className={cn(
+                "rounded-full",
+                !qTags[0]
+                  ? "bg-accent_alt hover:bg-accent_alt"
+                  : "bg-transparent border text-black border-gray-300 hover:bg-gray-200"
+              )}
+            >
+              All
+            </Button>
+            {tags.map((tag) => (
               <Button
+                key={tag.name}
                 onClick={() => {
-                  setQTags([]);
                   setPage(1);
+                  setQTags([tag.name]);
                   closeAside();
                 }}
                 className={cn(
                   "rounded-full",
-                  !qTags[0]
+                  qTags[0] === tag.name
                     ? "bg-accent_alt hover:bg-accent_alt"
-                    : "bg-transparent border text-black border-gray-300 hover:bg-gray-200"
+                    : "bg-transparent border border-gray-300 text-black hover:bg-gray-200"
                 )}
               >
-                All
+                {tag.name}
               </Button>
-              {tags.map((tag) => (
-                <Button
-                  key={tag.name}
+            ))}
+          </div>
+        </div>
+
+        <button
+          onClick={() => {
+            const tagMenu = document.querySelector(".tag-menu");
+            tagMenu?.classList.toggle("tag-menu-show");
+          }}
+          className="bg-gray-100 border-e border-gray-300 py-4 px-2 rounded-e-full mt-24 h-fit lg:hidden"
+        >
+          <DotsThreeOutlineVertical size={24} />
+        </button>
+      </aside>
+      <div className="w-[95%] lg:w-3/4 px-8  mx-auto pb-36 mt-4">
+        <div className="flex flex-col md:items-center gap-y-4 md:flex-row md:justify-between">
+          <div className="flex gap-4 items-center">
+            <DropdownMenu>
+              <DropdownMenuTrigger className="focus:outline-none gap-2 flex  text-sm justify-center items-center text-start px-4 rounded-md border py-2 border-gray-200 drop-shadow-md bg-white">
+                <SlidersHorizontal size={22} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-36">
+                <DropdownMenuLabel>Sort By</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+
+                <DropdownMenuItem
+                  className={cn(
+                    "cursor-pointer",
+                    sort === -1 && "bg-black text-white"
+                  )}
+                  onClick={() => handleSort(-1)}
+                >
+                  New
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  className={cn(
+                    "cursor-pointer mt-2",
+                    sort === 1 && "bg-black text-white"
+                  )}
+                  onClick={() => handleSort(1)}
+                >
+                  Latest
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger className="focus:outline-none gap-2 flex  text-sm justify-center items-center text-start px-4 rounded-md border py-2 border-gray-200 drop-shadow-md bg-white">
+                <p className="font-bold text-gray-600"> Category: </p>
+                <Badge className="bg-secondary text-slate-500 hover:none">
+                  {qcategory.length ? qcategory : "All"}
+                </Badge>
+                <CaretDown size={22} className="text-gray-500 ms-2" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-48">
+                <DropdownMenuLabel>Category</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  className="cursor-pointer"
                   onClick={() => {
                     setPage(1);
-                    setQTags([tag.name]);
-                    closeAside();
+                    setQCategory("");
                   }}
-                  className={cn(
-                    "rounded-full",
-                    qTags[0] === tag.name
-                      ? "bg-accent_alt hover:bg-accent_alt"
-                      : "bg-transparent border border-gray-300 text-black hover:bg-gray-200"
-                  )}
                 >
-                  {tag.name}
-                </Button>
-              ))}
-            </div>
+                  All
+                </DropdownMenuItem>
+                {categories &&
+                  categories.map((category, i) => (
+                    <DropdownMenuItem
+                      key={i}
+                      className="cursor-pointer"
+                      onClick={() => {
+                        setPage(1);
+                        setQCategory(category.name);
+                      }}
+                    >
+                      {category.name}
+                    </DropdownMenuItem>
+                  ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
-          <button
-            onClick={() => {
-              const tagMenu = document.querySelector(".tag-menu");
-              tagMenu?.classList.toggle("tag-menu-show");
-            }}
-            className="bg-gray-100 border-e border-gray-300 py-4 px-2 rounded-e-full mt-24 h-fit lg:hidden"
-          >
-            <DotsThreeOutlineVertical size={24} />
-          </button>
-        </aside>
-        <div className="w-[95%] lg:w-3/4 px-8  mx-auto pb-36 mt-4">
-          <div className="flex flex-col md:items-center gap-y-4 md:flex-row md:justify-between">
-            <div className="flex gap-4 items-center">
-              <DropdownMenu>
-                <DropdownMenuTrigger className="focus:outline-none gap-2 flex  text-sm justify-center items-center text-start px-4 rounded-md border py-2 border-gray-200 drop-shadow-md bg-white">
-                  <SlidersHorizontal size={22} />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-36">
-                  <DropdownMenuLabel>Sort By</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-
-                  <DropdownMenuItem
-                    className={cn(
-                      "cursor-pointer",
-                      sort === -1 && "bg-black text-white"
-                    )}
-                    onClick={() => handleSort(-1)}
-                  >
-                    New
-                  </DropdownMenuItem>
-                  <DropdownMenuItem
-                    className={cn(
-                      "cursor-pointer mt-2",
-                      sort === 1 && "bg-black text-white"
-                    )}
-                    onClick={() => handleSort(1)}
-                  >
-                    Latest
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-
-              <DropdownMenu>
-                <DropdownMenuTrigger className="focus:outline-none gap-2 flex  text-sm justify-center items-center text-start px-4 rounded-md border py-2 border-gray-200 drop-shadow-md bg-white">
-                  <p className="font-bold text-gray-600"> Category: </p>
-                  <Badge className="bg-secondary text-slate-500 hover:none">
-                    {qcategory.length ? qcategory : "All"}
-                  </Badge>
-                  <CaretDown size={22} className="text-gray-500 ms-2" />
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-48">
-                  <DropdownMenuLabel>Category</DropdownMenuLabel>
-                  <DropdownMenuSeparator />
-                  <DropdownMenuItem
-                    className="cursor-pointer"
-                    onClick={() => {
-                      setPage(1);
-                      setQCategory("");
-                    }}
-                  >
-                    All
-                  </DropdownMenuItem>
-                  {categories &&
-                    categories.map((category, i) => (
-                      <DropdownMenuItem
-                        key={i}
-                        className="cursor-pointer"
-                        onClick={() => {
-                          setPage(1);
-                          setQCategory(category.name);
-                        }}
-                      >
-                        {category.name}
-                      </DropdownMenuItem>
-                    ))}
-                </DropdownMenuContent>
-              </DropdownMenu>
-            </div>
-
-            <Search setPage={setPage} />
-          </div>
-
-          <div className="w-full flex justify-center mb-12">
-            {isLoading ? (
-              <LoadingRed style="mt-20" />
-            ) : (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mt-6 gap-4">
-                {menus &&
-                  menus.map((menu: MenuI, i) => <Card menu={menu} key={i} />)}
-              </div>
-            )}
-          </div>
-          {totalPage && totalPage > 1 && !isLoading && (
-            <Pagination page={page} setPage={setPage} totalPage={totalPage} />
-          )}
+          <Search setPage={setPage} />
         </div>
-        <Modal />
-      </section>
-    </>
+
+        {isLoading ? (
+          <div className="w-full flex justify-center">
+            <LoadingRed style="mt-20" />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 mt-6 gap-4">
+            {menus &&
+              menus.map((menu: MenuI, i) => <Card menu={menu} key={i} />)}
+          </div>
+        )}
+
+        {totalPage && totalPage > 1 && !isLoading && (
+          <Pagination page={page} setPage={setPage} totalPage={totalPage} />
+        )}
+      </div>
+      <Modal />
+    </section>
   );
 };
 
